@@ -1,0 +1,18 @@
+[package]
+name = "payment_kit"
+version = "0.1.1"
+edition = "2024"
+authors = ["Jerry Maheswara <jerrymaheswara@gmail.com>"]
+description = "A powerful and extensible payment toolkit for Rust. A library for integrating payment gateways, including payment initiation, callback validation, and refund management."
+license = "Apache-2.0"
+repository = "https://github.com/jerry-maheswara-github/payment_kit"
+documentation = "https://docs.rs/payment_kit"
+readme = "README.md"
+keywords = ["payment", "gateway", "integration", "refund", "callback"]
+categories = ["web-programming"]
+
+[dependencies]
+thiserror = "2.0.12"
+serde = { version = "1.0.219", features = ["derive"] }
+async-trait = "0.1.88"
+tokio = { version = "1.45.0", features = ["rt", "rt-multi-thread", "macros"] }
