@@ -14,6 +14,15 @@ pub enum PaymentError {
     #[error("Network error: {0}")]
     Network(String),
 
-    #[error("Unknown error")]
+    #[error("Validation error: {0}")]
+    ValidationError(String),
+
+    #[error("Processing error: {0}")]
+    ProcessingError(String),
+
+    #[error("Service unavailable: {0}")]
+    Unavailable(String),
+
+    #[error("Unknown error occurred")]
     Unknown,
 }

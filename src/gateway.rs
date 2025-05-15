@@ -1,13 +1,9 @@
-use async_trait::async_trait;
-
 use crate::error::PaymentError;
-use crate::models::{CallbackPayload, CallbackValidationResult, PaymentRequest, PaymentResponse, RefundRequest, RefundResponse};
+use crate::models::{PaymentRequest, PaymentResponse, RefundResponse};
+use crate::status::PaymentStatus;
 
-#[async_trait]
-pub trait PaymentGateway: Send + Sync {
-    async fn initiate_payment(&self, req: PaymentRequest) -> Result<PaymentResponse, PaymentError>;
-
-    async fn validate_callback(&self, payload: CallbackPayload) -> Result<CallbackValidationResult, PaymentError>;
-
-    async fn refund(&self, req: RefundRequest) -> Result<RefundResponse, PaymentError>;
+pub trait PaymentGateway {
+    fn create_payment(&self, req: PaymentRequest) -> Result<PaymentResponse, PaymentError>;
+    fn check_status(&self, transaction_id: &str) -> Result<PaymentStatus, PaymentError>;
+    fn refund(&self, transaction_id: &str) -> Result<RefundResponse, PaymentError>;
 }
