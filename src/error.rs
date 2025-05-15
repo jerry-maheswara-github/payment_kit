@@ -9,10 +9,10 @@ pub enum PaymentError {
     InvalidCallback(String),
 
     #[error("Gateway error: {0}")]
-    Gateway(String),
+    GatewayError(String),
 
     #[error("Network error: {0}")]
-    Network(String),
+    NetworkError(String),
 
     #[error("Validation error: {0}")]
     ValidationError(String),
@@ -23,6 +23,6 @@ pub enum PaymentError {
     #[error("Service unavailable: {0}")]
     Unavailable(String),
 
-    #[error("Unknown error occurred")]
-    Unknown,
+    #[error("Unknown error occurred: {0}")]
+    Unknown(String),
 }

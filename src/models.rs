@@ -1,10 +1,21 @@
 use serde::{Deserialize, Serialize};
-use crate::status::{PaymentStatus, TransactionStatus};
+use crate::status::{PaymentStatus};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum PaymentInstrument {
+    CreditCard { provider: String },
+    VirtualAccount { provider: String },
+    BankTransfer { provider: String },
+    EWallet { provider: String },
+    Custom { provider: String },
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PaymentRequest {
-    pub amount: f64,
+    pub order_id: String,
+    pub amount: u64,
     pub currency: String,
+    pub payment_instrument: PaymentInstrument,
     pub customer_id: Option<String>,
     pub description: Option<String>,
     pub metadata: Option<serde_json::Value>,
@@ -13,14 +24,16 @@ pub struct PaymentRequest {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PaymentResponse {
     pub transaction_id: String,
-    pub redirect_url: Option<String>,
+    pub amount: u64,
+    pub payment_instrument: PaymentInstrument,
     pub status: PaymentStatus,
+    pub redirect_url: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RefundRequest {
     pub transaction_id: String,
-    pub amount: f64,
+    pub amount: u64,
     pub reason: Option<String>,
 }
 
@@ -28,25 +41,6 @@ pub struct RefundRequest {
 pub struct RefundResponse {
     pub refund_id: String,
     pub status: PaymentStatus,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct CallbackPayload {
     pub transaction_id: String,
-    pub status: PaymentStatus,
-    pub raw_payload: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct CallbackValidationResult {
-    pub valid: bool,
-    pub status: PaymentStatus,
-    pub transaction_id: String,
-}
-
-pub struct PaymentDetail {
-    pub transaction_id: String,
-    pub payment_status: PaymentStatus,
-    pub transaction_status: Option<TransactionStatus>,
-    pub updated_at: String,
+    pub refunded: bool,
 }

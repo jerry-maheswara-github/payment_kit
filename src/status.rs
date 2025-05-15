@@ -9,16 +9,11 @@ pub enum PaymentStatus {
     Expired,
     Cancelled,
     Refunded,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all = "snake_case")]
-pub enum TransactionStatus {
+    Success,
     Authorized,
     Captured,
-    Refunded,
     Chargeback,
-    Void,
     Declined,
+    Void,
     PendingSettlement,
 }
