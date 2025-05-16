@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
-use crate::status::{PaymentStatus};
+use crate::status::PaymentStatus;
 
+/// Represents the supported types of payment instruments.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum PaymentInstrument {
     CreditCard { provider: String },
@@ -10,6 +11,7 @@ pub enum PaymentInstrument {
     Custom { provider: String },
 }
 
+/// Payload sent to initiate a payment transaction.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PaymentRequest {
     pub order_id: String,
@@ -21,6 +23,7 @@ pub struct PaymentRequest {
     pub metadata: Option<serde_json::Value>,
 }
 
+/// Response returned after successfully creating a payment.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PaymentResponse {
     pub transaction_id: String,
@@ -30,6 +33,7 @@ pub struct PaymentResponse {
     pub redirect_url: Option<String>,
 }
 
+/// Request payload to initiate a refund.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RefundRequest {
     pub transaction_id: String,
@@ -37,6 +41,7 @@ pub struct RefundRequest {
     pub reason: Option<String>,
 }
 
+/// Response returned after processing a refund.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RefundResponse {
     pub refund_id: String,

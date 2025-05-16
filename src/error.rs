@@ -1,5 +1,6 @@
 use thiserror::Error;
 
+/// Common error variants that can occur in the payment system.
 #[derive(Error, Debug)]
 pub enum PaymentError {
     #[error("Invalid request: {0}")]

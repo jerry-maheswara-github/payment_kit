@@ -1,19 +1,11 @@
 use serde::{Deserialize, Serialize};
 
+/// Enum representing the current state of a payment.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all = "snake_case")]
 pub enum PaymentStatus {
     Pending,
-    Paid,
+    Success,
     Failed,
-    Expired,
     Cancelled,
     Refunded,
-    Success,
-    Authorized,
-    Captured,
-    Chargeback,
-    Declined,
-    Void,
-    PendingSettlement,
 }
