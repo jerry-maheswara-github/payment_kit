@@ -1,27 +1,3 @@
-# 💳 payment_kit
-
-A powerful and extensible payment toolkit for Rust — featuring core data models, robust error handling,
-flexible status flows, and seamless integration into any payment system.
-
-Designed to be embedded in services that communicate with third-party payment providers,
-the `payment_kit` ensures consistency and testability across environments.
-
----
-
-## ✨ Features
-
-- 🔌 Pluggable `PaymentGateway` trait for easy integration with third-party providers
-- 🧾 Strongly-typed `PaymentRequest` and `PaymentResponse` structures
-- ✅ Input validation via the `ValidatableRequest` trait as an option
-- 🛑 Rich, structured error types with `PaymentError`
-- 🧪 Built-in mock gateway for testing and development
-- 💳 Support for various payment instruments (e.g., credit cards, e-wallets, bank transfers).
-
----
-
-## 🚀 Quick Start
-
-```rust
 use payment_kit::models::{PaymentInstrument, PaymentRequest, PaymentResponse, RefundResponse};
 use payment_kit::processor::PaymentProcessor;
 use payment_kit::utils::validation::ValidatableRequest;
@@ -85,7 +61,7 @@ fn main() -> Result<(), PaymentError> {
     };
 
     if let Err(e) = request.validate() {
-        eprintln!("Validation failed: {}", e);
+        eprintln!("Validation failed: {}", e.to_string());
     }
 
     let response = processor.create_payment(request);
@@ -100,32 +76,3 @@ fn main() -> Result<(), PaymentError> {
 
     Ok(())
 }
-```
-
----
-
-## 📄 License
-
-Licensed under the [Apache-2.0 license](http://www.apache.org/licenses/LICENSE-2.0.txt)
-
----
-
-## 👨 Author
-
-Jerry Maheswara <jerrymaheswara@gmail.com>
-
----
-
-## ❤️ Built with Love in Rust
-
-This project is built with ❤️ using **Rust** — a systems programming language that is safe, fast, and concurrent.  
-Rust is the perfect choice for building reliable and efficient applications.
-
----
-
-## 🤝 Contributing
-
-Pull requests, issues, and feedback are welcome!  
-If you find this crate useful, give it a ⭐ and share it with others in the Rustacean community.
-
----
