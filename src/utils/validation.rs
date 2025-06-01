@@ -46,7 +46,7 @@ impl ValidatableRequest for PaymentRequest {
     }
 
     fn validate_amount(&self) -> Result<(), PaymentError> {
-        if self.amount <= 0 {
+        if self.amount == 0 {
             return Err(PaymentError::ValidationError("Amount must be greater than zero.".into()));
         }
         Ok(())

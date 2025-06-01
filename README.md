@@ -10,12 +10,12 @@ the `payment_kit` ensures consistency and testability across environments.
 
 ## ✨ Features
 
-- 🔌 Pluggable `PaymentGateway` trait for easy integration with third-party providers
-- 🧾 Strongly-typed `PaymentRequest` and `PaymentResponse` structures
-- ✅ Input validation via the `ValidatableRequest` trait as an option
-- 🛑 Rich, structured error types with `PaymentError`
-- 🧪 Built-in mock gateway for testing and development
-- 💳 Support for various payment instruments (e.g., credit cards, e-wallets, bank transfers).
+- Pluggable `PaymentGateway` trait for easy integration with third-party providers
+- Strongly-typed `PaymentRequest` and `PaymentResponse` structures
+- Input validation via the `ValidatableRequest` trait as an option
+- Rich, structured error types with `PaymentError`
+- Built-in mock gateway for testing and development
+- Support for various payment instruments (e.g., credit cards, e-wallets, bank transfers).
 
 ---
 
