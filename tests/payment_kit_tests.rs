@@ -6,16 +6,6 @@ use payment_kit::status::PaymentStatus;
 pub struct MockPaymentGateway;
 
 impl PaymentGateway for MockPaymentGateway {
-    // fn create_payment(&self, req: PaymentRequest) -> Result<PaymentResponse, PaymentError> {
-    //     Ok(PaymentResponse {
-    //         transaction_id: format!("mock_txn_{}", req.order_id),
-    //         amount: req.amount,
-    //         payment_instrument: req.payment_instrument,
-    //         status: PaymentStatus::Pending,
-    //         redirect_url: Some("https://mock.payment/redirect".to_string()),
-    //     })
-    // }
-
     fn create_payment(&self, req: PaymentRequest) -> Result<PaymentResponse, PaymentError> {
         if req.amount == 0 || req.order_id.contains("fail") {
             return Err(PaymentError::InvalidRequest("Simulated failure".into()));
@@ -53,10 +43,8 @@ impl PaymentGateway for MockPaymentGateway {
 
 #[cfg(test)]
 mod tests {
-    // use payment_kit::error::PaymentError;
     use payment_kit::models::{PaymentInstrument, PaymentRequest};
     use payment_kit::processor::PaymentProcessor;
-    // use payment_kit::status::PaymentStatus;
     use crate::MockPaymentGateway;
     use super::*;
 
@@ -102,7 +90,6 @@ mod tests {
         };
 
         let result = processor.create_payment(req);
-        eprintln!("{:?}", result);
         assert!(result.is_err());
 
         match result {
